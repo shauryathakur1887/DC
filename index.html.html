@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Welcome to Our Store</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff0000;
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #ff0000;
+        }
+        
+        /* Main Content */
+        .main-content {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        h1 {
+            font-size: 4rem;
+            color: #ff0000;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 0, 0, 0.3);
+        }
+        h2 {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ff0000;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .main-text {
+            font-size: 1.2rem;
+            margin: 40px auto;
+            max-width: 700px;
+            line-height: 1.8;
+        }
+        .main-text strong {
+            color: #ff0000;
+        }
+        .btn {
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 30px 0;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+        
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 50px 0;
+        }
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #ff0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+        .social-icon svg {
+            fill: #ffffff;
+            width: 30px;
+            height: 30px;
+        }
+        
+        /* Auth Pages */
+        .auth-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 40px;
+            background-color: #111;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+        }
+        .auth-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #ff0000;
+            margin-bottom: 30px;
+        }
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .form-group label {
+            color: #fff;
+            font-weight: bold;
+        }
+        .form-group input {
+            padding: 15px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #222;
+            color: #fff;
+            font-size: 1rem;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff0000;
+        }
+        .auth-switch {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+        }
+        .auth-switch a {
+            color: #ff0000;
+            text-decoration: none;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+            border-top: 1px solid #333;
+            color: #888;
+        }
+        
+        /* Mouse Circle Follower - Blue Theme */
+        .mouse-circle {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #3b82f6 0%, #1d4ed8 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+            transform: translate(-50%, -50%);
+        }
+        .mouse-trail {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: rgba(59, 130, 246, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.3s ease-out;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.5rem; }
+            .main-text { font-size: 1rem; }
+            .nav-links { gap: 15px; }
+            .auth-container { margin: 50px 20px; padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="container">
+        <nav>
+            <div class="logo">SHOP</div>
+            <div class="nav-links">
+                <a href="#home" onclick="showPage('home')">Home</a>
+                <a href="#login" onclick="showPage('login')">Login</a>
+                <a href="#signup" onclick="showPage('signup')">Sign Up</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <div class="container">
+            <div class="main-content fade-in">
+                <h1>SHOP</h1>
+                <h2>Welcome to our shop</h2>
+                <p class="main-text">
+                    <strong>Hey welcome to our shop page where you can buy anything that list on our discord server and if you want to buy just click the button blow down.</strong> 
+                    We've got amazing products and everything is all okay with our service!
+                </p>
+                <a href="https://discord.gg/uDyjDwkUcJ" target="_blank" class="btn">Join Discord to Buy Now</a>
+                
+                <div class="social-icons">
+                    <a href="https://discord.gg/uDyjDwkUcJ" target="_blank" class="social-icon" title="Join Our Discord">
+                        <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 003.233-.757.039.039 0 00.018-.014.08.08 0 01.055-.035 13.73 13.73 0 002.553.35.078.078 0 00.084.028 19.842 19.842 0 006.002-3.03.08.08 0 00.031-.057c.419-4.478-.834-9.01-2.533-13.69a.07.07 0 00-.032-.027zM8.012 15.324a1.192 1.192 0 01-1.189-1.197 1.19 1.19 0 011.188-1.196 1.192 1.192 0 010 2.393zm7.97 0a1.192 1.192 0 01-1.189-1.197 1.19 1.19 0 011.188-1.196 1.192 1.192 0 010 2.393z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/sumit___thakur__50/" target="_blank" class="social-icon" title="Follow on Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class="container">
+                <p>All okay – Built with love. Shop smart on Discord!</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login" class="page" style="display: none;">
+        <div class="container">
+            <div class="auth-container fade-in">
+                <h2 class="auth-title">Login</h2>
+                <form class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+                <p class="auth-switch">
+                    Don't have an account? <a href="#signup" onclick="showPage('signup')">Sign up here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Page -->
+    <div id="signup" class="page" style="display: none;">
+        <div class="container">
+            <div class="auth-container fade-in">
+                <h2 class="auth-title">Sign Up</h2>
+                <form class="auth-form">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm">Confirm Password</label>
+                        <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit" class="btn">Sign Up</button>
+                </form>
+                <p class="auth-switch">
+                    Already have an account? <a href="#login" onclick="showPage('login')">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mouse Circle Follower Script -->
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Mouse Circle Follower
+        (function() {
+            // Check if user prefers reduced motion
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            
+            let mouseX = 0, mouseY = 0;
+            const trail = [];
+            const maxTrail = 5;
+            
+            // Create main circle
+            const circle = document.createElement('div');
+            circle.className = 'mouse-circle';
+            document.body.appendChild(circle);
+            
+            // Pre-create trail elements
+            const trailElements = [];
+            for (let i = 0; i < maxTrail; i++) {
+                const el = document.createElement('div');
+                el.className = `mouse-trail trail-${i}`;
+                el.style.display = 'none';
+                document.body.appendChild(el);
+                trailElements[i] = el;
+            }
+            
+            // Mouse move handler
+            const handleMouseMove = (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                // Add to trail
+                trail.push({ x: mouseX, y: mouseY });
+                if (trail.length > maxTrail) trail.shift();
+                
+                // Update main circle
+                if (circle) {
+                    circle.style.left = mouseX + 'px';
+                    circle.style.top = mouseY + 'px';
+                }
+                
+                // Update trail
+                trail.forEach((pos, i) => {
+                    const trailEl = trailElements[i];
+                    if (trailEl) {
+                        trailEl.style.display = 'block';
+                        trailEl.style.left = pos.x + 'px';
+                        trailEl.style.top = pos.y + 'px';
+                        trailEl.style.opacity = (maxTrail - i) / maxTrail * 0.6;
+                        trailEl.style.transform = `scale(${0.3 + (i / maxTrail) * 0.7}) translate(-50%, -50%)`;
+                    }
+                });
+            };
+            
+            // Add event listener
+            window.addEventListener('mousemove', handleMouseMove);
+            
+            // Cleanup
+            window.addEventListener('beforeunload', () => {
+                window.removeEventListener('mousemove', handleMouseMove);
+            });
+        })();
+        
+        // Form handling
+        document.querySelectorAll('.auth-form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Form submitted! (This is a demo - no data is saved)');
+            });
+        });
+    </script>
+</body>
+</html>
